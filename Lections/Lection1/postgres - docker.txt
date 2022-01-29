@@ -1,4 +1,5 @@
-sudo docker run \
+sudo \
+docker run \
 --name pg-docker \
 -e POSTGRES_PASSWORD=sample_password \
 -d \
