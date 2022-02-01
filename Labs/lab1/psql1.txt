@@ -1,0 +1,163 @@
+Server [localhost]:
+Database [postgres]:
+Port [5433]:
+Username [postgres]:
+Password for user postgres:
+psql (13.2)
+WARNING: Console code page (866) differs from Windows code page (1251)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# \l
+                                             List of databases
+   Name    |  Owner   | Encoding |        Collate         |         Ctype          |   Access privileges
+-----------+----------+----------+------------------------+------------------------+-----------------------
+ lection4  | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |
+ postgres  | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |
+ template0 | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 | =c/postgres          +
+           |          |          |                        |                        | postgres=CTc/postgres
+ template1 | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 | =c/postgres          +
+           |          |          |                        |                        | postgres=CTc/postgres
+(4 rows)
+
+
+postgres=# \du
+                                   List of roles
+ Role name |                         Attributes                         | Member of
+-----------+------------------------------------------------------------+-----------
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+
+postgres=# create database lab1_2022;
+CREATE DATABASE
+postgres=# \l
+                                             List of databases
+   Name    |  Owner   | Encoding |        Collate         |         Ctype          |   Access privileges
+-----------+----------+----------+------------------------+------------------------+-----------------------
+ lab1_2022 | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |
+ lection4  | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |
+ postgres  | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 |
+ template0 | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 | =c/postgres          +
+           |          |          |                        |                        | postgres=CTc/postgres
+ template1 | postgres | UTF8     | Ukrainian_Ukraine.1251 | Ukrainian_Ukraine.1251 | =c/postgres          +
+           |          |          |                        |                        | postgres=CTc/postgres
+(5 rows)
+
+
+postgres=# create user sample_user with password '111';
+CREATE ROLE
+postgres=# \du
+                                    List of roles
+  Role name  |                         Attributes                         | Member of
+-------------+------------------------------------------------------------+-----------
+ postgres    | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+ sample_user |                                                            | {}
+
+
+postgres=# \c lab1_2022
+You are now connected to database "lab1_2022" as user "postgres".
+lab1_2022=# grant all on database lab1_2022 to sample_user;
+GRANT
+lab1_2022=# \c sample_user;
+ФАТАЛЬНО:  бази даних "sample_user" не ?снує
+Previous connection kept
+lab1_2022=# \c lab1_2022 sample_user;
+Password for user sample_user:
+You are now connected to database "lab1_2022" as user "sample_user".
+lab1_2022=> \i c:/data/er1.sql;
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+CREATE TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+ALTER TABLE
+psql:c:/data/er1.sql:51: ПОМИЛКА:  у ц?льов?й зовн?шн?й таблиц? "brand" немає обмеження ун?кальност?, в?дпов?дного даним ключам
+psql:c:/data/er1.sql:53: ПОМИЛКА:  у ц?льов?й зовн?шн?й таблиц? "model" немає обмеження ун?кальност?, в?дпов?дного даним ключам
+lab1_2022=> \dt
+                 List of relations
+ Schema |        Name        | Type  |    Owner
+--------+--------------------+-------+-------------
+ public | brand              | table | sample_user
+ public | feature            | table | sample_user
+ public | model              | table | sample_user
+ public | smartphone         | table | sample_user
+ public | smartphone_feature | table | sample_user
+ public | smartphone_user    | table | sample_user
+ public | user               | table | sample_user
+(7 rows)
+
+
+lab1_2022=> drop table model;
+DROP TABLE
+lab1_2022=> drop table brend;
+ПОМИЛКА:  таблиця "brend" не ?снує
+lab1_2022=> drop table brand;
+DROP TABLE
+lab1_2022=> \dt
+                 List of relations
+ Schema |        Name        | Type  |    Owner
+--------+--------------------+-------+-------------
+ public | feature            | table | sample_user
+ public | smartphone         | table | sample_user
+ public | smartphone_feature | table | sample_user
+ public | smartphone_user    | table | sample_user
+ public | user               | table | sample_user
+(5 rows)
+
+
+lab1_2022=> CREATE TABLE "brand" (  "id" serial PRIMARY KEY,  "title" varchar(255));
+CREATE TABLE
+lab1_2022=> CREATE TABLE "model" (  "id" serial PRIMARY KEY,  "brand_id" integer,  "title" varchar(255));
+CREATE TABLE
+lab1_2022=> ALTER TABLE "model" ADD CONSTRAINT "model_brand" FOREIGN KEY ("brand_id") REFERENCES "brand" ("id");ALTER TABLE "smartphone" ADD CONSTRAINT "smartphone_model" FOREIGN KEY ("model_id") REFERENCES "model" ("id");
+ALTER TABLE
+ALTER TABLE
+lab1_2022=>
+lab1_2022=> \dt
+                 List of relations
+ Schema |        Name        | Type  |    Owner
+--------+--------------------+-------+-------------
+ public | brand              | table | sample_user
+ public | feature            | table | sample_user
+ public | model              | table | sample_user
+ public | smartphone         | table | sample_user
+ public | smartphone_feature | table | sample_user
+ public | smartphone_user    | table | sample_user
+ public | user               | table | sample_user
+(7 rows)
+
+
+lab1_2022=> \d brand
+                                    Table "public.brand"
+ Column |          Type          | Collation | Nullable |              Default
+--------+------------------------+-----------+----------+-----------------------------------
+ id     | integer                |           | not null | nextval('brand_id_seq'::regclass)
+ title  | character varying(255) |           |          |
+Indexes:
+    "brand_pkey" PRIMARY KEY, btree (id)
+Referenced by:
+    TABLE "model" CONSTRAINT "model_brand" FOREIGN KEY (brand_id) REFERENCES brand(id)
+
+
+lab1_2022=> \d model
+                                     Table "public.model"
+  Column  |          Type          | Collation | Nullable |              Default
+----------+------------------------+-----------+----------+-----------------------------------
+ id       | integer                |           | not null | nextval('model_id_seq'::regclass)
+ brand_id | integer                |           |          |
+ title    | character varying(255) |           |          |
+Indexes:
+    "model_pkey" PRIMARY KEY, btree (id)
+Foreign-key constraints:
+    "model_brand" FOREIGN KEY (brand_id) REFERENCES brand(id)
+Referenced by:
+    TABLE "smartphone" CONSTRAINT "smartphone_model" FOREIGN KEY (model_id) REFERENCES model(id)
+
+
+lab1_2022=>
