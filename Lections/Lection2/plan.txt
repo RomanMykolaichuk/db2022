@@ -1,0 +1,35 @@
+Оператор Select
+1. Employee list
+2. How manu times employee 10001 was raised?(where)
+3. Aliases select column as "<new name>"
+4. Column concat CONCAT(col1,' ',col2) as "New name";
+5. Functions(aggregate,scalar)
+6. Aggregate count, sum, min, max, avg, count.
+ https://www.postgresql.org/docs/14/functions-aggregate.html
+7. Comments -- /* */
+8. .png, where, and, or
+9. Common mistakes
+10. Filtering data (multiple and + or + ())
+11. NOT keyword < > <= = != <>
+13. Order of operartors from->where->select
+14. Operators precendence 
+https://www.postgresql.org/docs/14/sql-syntax-lexical.html#SQL-PRECEDENCE
+15. NULL checking
+16. IS
+17. Replace NULL coalesce(<column>, 'value')
+18. 3-valued logic
+19. Between and, IN (,,,), Like, ILike
+20. CAST(some as text) some :: text (only text for Like)
+21. Date (GMT UTC : set time zone 'UTC'; 
+show timezone; alter user postgres set timezone='')
+22. Date format iso-8601
+23. timestamp
+24. Help: https://dev.to/duffn/creating-a-date-dimension-table-in-postgresql-5gjp
+25. Distinct
+26. Sort by
+27. Join (inner, self, outer)
+28. Using
+
+
+
+

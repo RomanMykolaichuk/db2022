@@ -1,3 +1,5 @@
+-- docker pull postgres
+
 sudo \
 docker run \
 --name pg-docker \
