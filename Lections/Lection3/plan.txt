@@ -1,0 +1,20 @@
+1. Create View
+2. Self Join
+3. Group by
+4. Order: From->Where->Group by->Select->Order by
+5. Having with Where and Order
+6. Grouping columns like a PK
+7. Union, Union All (don't remove duplicates)
+8. Grouping Sets
+9. Extract(year from datefield) as "year" (example)
+10.Window functions
+11.Limit with Where
+12.Partition by
+13.Order by in window functions
+14.~Range
+15.~Last_Value, First_value, Sum, Row_number (postgres tutorial)
+16.Conditional statements CASE
+17.NULLIF
+18.Indexes, explain analize, types
+19.Subqueries (with Join)
+20.Subqueries operators Exists, In, Any, Some, All

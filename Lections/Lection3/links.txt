@@ -1,0 +1,8 @@
+https://www.postgresqltutorial.com/postgresql-window-function/
+
+https://www.postgresqltutorial.com/plpgsql-case-statement/
+
+https://www.postgresqltutorial.com/postgresql-subquery/
+
+https://www.postgresql.org/docs/14/indexes-types.html
+
