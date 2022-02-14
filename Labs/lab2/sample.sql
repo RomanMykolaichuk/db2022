@@ -1,0 +1,103 @@
+-- 1 Обов'язково має бути пояснення що робить даний запит!!!
+-- select *  from titles;
+--2  Обрати всі значення стовпчика emp_no з таблиці titles
+-- select emp_no, title from titles
+--3
+-- select emp_no as "Employee number", title from titles
+--4
+-- select emp_no, title from titles
+-- where to_date='9999-01-01';
+--5 Обов'язково має бути пояснення що робить даний запит!!!
+-- select emp_no, first_name || last_name from employees;
+--6
+-- select emp_no, concat(first_name, last_name) from employees;
+--7
+-- select max(salary) from salaries;
+--8
+-- select avg(salary) from salaries;
+--9
+-- select min(salary) from salaries;
+-- 
+--10
+-- select count(salary) from salaries;
+--11
+-- select salary from salaries
+-- where salary<90000;
+--12
+-- select salary from salaries
+-- where salary>90000;
+--13
+-- select salary from salaries
+-- where salary<90000 and salary>80000;
+--14
+-- select salary from salaries
+-- where salary<90000 or salary>122000;
+--15 
+-- select salary from salaries
+-- where salary<90000 and salary>100000 or to_date > '2001-01-01';
+--16
+-- select salary from salaries
+-- where (salary<90000 and to_date<'2000-01-01') or (salary>100000 and to_date > '2001-01-01');
+--17
+-- select * from employees
+-- where NOT gender = 'M';
+--18
+-- select * from employees
+-- where birth_date between '1930-01-01' and '1971-01-01'
+--19
+-- select extract (month from birth_date) from employees;
+--20
+-- select extract (month from birth_date) as "month" from employees
+-- where extract (month from birth_date) in (1,2,3);
+--21
+-- select * from employees
+-- where first_name Like '_a%';
+--22
+-- select * from employees
+-- where first_name ILike 'g%';
+--23
+-- Select from_date :: text from salaries;
+--24 
+-- select distinct first_name from employees;
+--25
+-- select * from salaries
+-- Order by salary;
+--26
+-- select * from salaries
+-- Order by salary desc;
+--27
+-- select * from salaries
+-- Order by to_date,salary desc;
+--28
+-- Select first_name, last_name, salary
+-- from employees e
+-- join salaries s on (e.emp_no = s.emp_no);
+--29
+-- Select first_name, last_name, salary
+-- from employees e
+-- left join salaries s on (e.emp_no = s.emp_no);
+--30
+-- Select first_name, last_name, salary
+-- from employees e
+-- Right join salaries s on (e.emp_no = s.emp_no);
+
+--31 
+-- Select first_name, last_name, salary
+-- from employees e
+-- full outer join salaries s on (e.emp_no = s.emp_no);
+--32
+-- Select first_name, last_name, salary
+-- from employees e
+-- join salaries s using (emp_no);
+--33 
+-- Select distinct e.first_name, e.last_name, e2.last_name
+-- from employees e
+-- join employees e2 on (e.first_name = e2.last_name);
+
+
+
+
+
+
+
+
